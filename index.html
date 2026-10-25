@@ -181,6 +181,102 @@
     }
 
     small { color: #aab8d4; display: block; margin-top: 18px; }
+    
+/* FRANKIE AI — Siri-inspired energy orb */
+.orb {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  background:
+    radial-gradient(circle at 35% 30%,
+      #ffffff 0%,
+      #a7f5ff 5%,
+      #29bfff 17%,
+      #386cff 38%,
+      #752bdf 64%,
+      #090b2a 100%);
+  box-shadow:
+    0 0 20px #32caff,
+    0 0 50px #397bffbb,
+    0 0 95px #a12bff66,
+    inset 0 0 28px #ffffff66;
+}
+
+.orb::before,
+.orb::after {
+  content: "";
+  position: absolute;
+  inset: -5%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.orb::before {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    #25dfff 55deg,
+    #8b5cff 115deg,
+    #ff59d6 175deg,
+    transparent 230deg,
+    #3c7bff 300deg,
+    transparent 360deg
+  );
+  filter: blur(5px);
+  opacity: .85;
+  animation: frankie-energy-spin 5s linear infinite;
+  z-index: -1;
+}
+
+.orb::after {
+  inset: 8%;
+  border: 2px solid #9beaffaa;
+  box-shadow: 0 0 22px #39cfff, inset 0 0 20px #743bff99;
+  animation: frankie-energy-pulse 2.5s ease-in-out infinite alternate;
+}
+
+.orb .energy-ring {
+  border-width: 2px;
+  border-style: solid;
+  filter: drop-shadow(0 0 7px #36dfff);
+}
+
+.orb .ring-one {
+  border-color: #4de6ff;
+}
+
+.orb .ring-two {
+  border-color: #d36bff;
+}
+
+.orb .ring-three {
+  border-color: #ffffffaa;
+}
+
+.orb .orb-core {
+  background: radial-gradient(
+    circle at 32% 25%,
+    #ffffff 0%,
+    #b5f8ff 12%,
+    #28c4ff 34%,
+    #4168ff 62%,
+    #8b30ed 100%
+  );
+  box-shadow:
+    0 0 22px #4de6ff,
+    0 0 48px #4678ff,
+    0 0 70px #9c38ff99;
+}
+
+@keyframes frankie-energy-spin {
+  from { transform: rotate(0deg) scale(.98); }
+  to { transform: rotate(360deg) scale(.98); }
+}
+
+@keyframes frankie-energy-pulse {
+  from { transform: scale(.97); opacity: .65; }
+  to { transform: scale(1.04); opacity: 1; }
+}
   </style>
 </head>
 <body>
