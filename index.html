@@ -64,6 +64,56 @@
         inset 8px 8px 24px #ffffff66;
       animation: glow 3s ease-in-out infinite alternate;
     }
+    
+.orb {
+  isolation: isolate;
+  overflow: visible;
+}
+
+.energy-ring {
+  position: absolute;
+  inset: 8%;
+  border: 2px solid #55dfff;
+  border-radius: 50%;
+  box-shadow: 0 0 14px #397bff, inset 0 0 12px #752bdf;
+  pointer-events: none;
+}
+
+.ring-one {
+  animation: ring-spin 5s linear infinite;
+}
+
+.ring-two {
+  inset: 16%;
+  border-color: #bb75ff;
+  animation: ring-spin 7s linear infinite reverse;
+}
+
+.ring-three {
+  inset: 3%;
+  border-color: #ffffffaa;
+  border-style: dashed;
+  animation: ring-spin 12s linear infinite;
+}
+
+.orb-core {
+  position: absolute;
+  inset: 28%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, #6beaff 25%, #397bff 55%, #6726d9 80%);
+  box-shadow: 0 0 25px #55dfff, 0 0 50px #752bdf;
+  animation: core-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes ring-spin {
+  from { transform: rotate(0deg) scaleX(1); }
+  to { transform: rotate(360deg) scaleX(1); }
+}
+
+@keyframes core-pulse {
+  from { transform: scale(.92); opacity: .8; }
+  to { transform: scale(1.08); opacity: 1; }
+}
 
     @keyframes glow {
       from { transform: scale(0.97); box-shadow: 0 0 25px #397bff66; }
@@ -117,7 +167,14 @@
     <h1>FRANKIE AI</h1>
     <p class="subtitle">Your personal voice assistant</p>
 
-    <div class="orb" aria-hidden="true"></div>
+    
+<div class="orb" aria-hidden="true">
+  <span class="energy-ring ring-one"></span>
+  <span class="energy-ring ring-two"></span>
+  <span class="energy-ring ring-three"></span>
+  <span class="orb-core"></span>
+</div>
+    
 
     <p id="status">Your assistant is ready.</p>
 
