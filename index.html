@@ -40,15 +40,30 @@
 
     .subtitle { color: #aab8d4; }
 
-    .orb {
-      width: 155px;
-      height: 155px;
-      margin: 28px auto;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #b7e2ff, #397bff 35%, #752bdf 70%, #101b3d);
-      box-shadow: 0 0 35px #397bff88, inset 0 0 25px #ffffff55;
-      animation: glow 3s ease-in-out infinite alternate;
-    }
+    
+.orb {
+  width: 190px;
+  height: 190px;
+  margin: 28px auto;
+  border-radius: 50%;
+  position: relative;
+  background:
+    radial-gradient(circle at 32% 25%,
+      #ffffff 0%,
+      #b9f1ff 7%,
+      #53c8ff 20%,
+      #397bff 38%,
+      #7138f5 62%,
+      #180b42 82%,
+      #05091b 100%);
+  box-shadow:
+    0 0 18px #55c8ff,
+    0 0 45px #397bffbb,
+    0 0 85px #752bdf99,
+    inset -12px -14px 28px #08051f,
+    inset 8px 8px 24px #ffffff66;
+  animation: glow 3s ease-in-out infinite alternate;
+}
 
     @keyframes glow {
       from { transform: scale(0.97); box-shadow: 0 0 25px #397bff66; }
