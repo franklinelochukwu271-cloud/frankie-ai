@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d24">
+  <title>FRANKIE AI | Voice Assistant</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #18295c, #080d24 65%);
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+      padding: 30px 22px;
+      border: 1px solid #344b85;
+      border-radius: 28px;
+      background: rgba(8, 13, 36, 0.88);
+      box-shadow: 0 0 45px #2349a533;
+    }
+
+    h1 {
+      color: #79aaff;
+      letter-spacing: 4px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle { color: #aab8d4; }
+
+    .orb {
+      width: 155px;
+      height: 155px;
+      margin: 28px auto;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #b7e2ff, #397bff 35%, #752bdf 70%, #101b3d);
+      box-shadow: 0 0 35px #397bff88, inset 0 0 25px #ffffff55;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { transform: scale(0.97); box-shadow: 0 0 25px #397bff66; }
+      to { transform: scale(1.04); box-shadow: 0 0 50px #7b43ff99; }
+    }
+
+    #status { color: #9dc4ff; min-height: 24px; }
+
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 20px;
+      margin: 6px;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #246bfe, #7939e8);
+    }
+
+    button:disabled { opacity: 0.55; cursor: wait; }
+
+    #listen { border-radius: 30px; padding: 16px 28px; }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid #344b85;
+      background: #101b3d;
+      color: white;
+      font-size: 16px;
+      margin-top: 16px;
+    }
+
+    #reply {
+      text-align: left;
+      line-height: 1.6;
+      background: #101b3d;
+      border-radius: 14px;
+      padding: 16px;
+      min-height: 65px;
+      margin-top: 20px;
+      overflow-wrap: anywhere;
+    }
+
+    small { color: #aab8d4; display: block; margin-top: 18px; }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <h1>FRANKIE AI</h1>
+    <p class="subtitle">Your personal voice assistant</p>
+
+    <div class="orb" aria-hidden="true"></div>
+
+    <p id="status">Your assistant is ready.</p>
+
+    <button id="listen">🎙️ Talk to Frankie</button>
+
+    <form id="chatForm">
+      <input id="message" placeholder="Type a message..." autocomplete="off">
+      <button type="submit">Send</button>
+    </form>
+
+    <div id="reply" aria-live="polite">
+      Hello! I'm Frankie. Tap the microphone button or type a message to begin.
+    </div>
+
+    <button id="speakAgain">🔊 Speak Again</button>
+    <button id="stopVoice">🔇 Stop Voice</button>
+
+    <small>Starter edition · Browser voice features</small>
+  </main>
+
+  <script>
+    const statusText = document.getElementById("status");
+    const reply = document.getElementById("reply");
+    const message = document.getElementById("message");
+    const listenButton = document.getElementById("listen");
+
+    let lastReply = "Hello! I'm Frankie. How can I help you today?";
+
+    function speak(text) {
+      if (!("speechSynthesis" in window)) {
+        statusText.textContent = "Speech output is not supported in this browser.";
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+      lastReply = text;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "en-NG";
+      utterance.rate = 1;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function respond(text) {
+      const words = text.toLowerCase().trim();
+      let answer;
+
+      if (/\b(hello|hi|hey)\b/.test(words)) {
+        answer = "Hello! I'm Frankie AI, your personal assistant. What can I help you with?";
+      } else if (words.includes("your name")) {
+        answer = "My name is Frankie AI. Nice to meet you!";
+      } else if (words.includes("time")) {
+        answer = "The time on this device is " +
+          new Date().toLocaleTimeString([], {hour: "numeric", minute: "2-digit"}) + ".";
+      } else if (words.includes("date")) {
+        answer = "Today is " +
+          new Date().toLocaleDateString([], {dateStyle: "full"}) + ".";
+      } else if (words.includes("thank")) {
+        answer = "You're welcome! I'm happy to help.";
+      } else if (words.includes("help")) {
+        answer = "You can greet me, ask my name, ask for the time or date, or type another message.";
+      } else {
+        answer = "I heard you say: " + text +
+          ". My smart AI connection has not been added yet. We'll build that next.";
+      }
+
+      reply.textContent = answer;
+      statusText.textContent = "Frankie has replied.";
+      speak(answer);
+    }
+
+    document.getElementById("chatForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const text = message.value.trim();
+      if (!text) return;
+      respond(text);
+      message.value = "";
+    });
+
+    listenButton.addEventListener("click", function() {
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        statusText.textContent =
+          "Voice input is not supported here. Try a supported browser or type below.";
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.lang = "en-NG";
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onstart = function() {
+        statusText.textContent = "Listening... Speak now.";
+        listenButton.disabled = true;
+      };
+
+      recognition.onresult = function(event) {
+        const spoken = event.results[0][0].transcript;
+        message.value = spoken;
+        respond(spoken);
+      };
+
+      recognition.onerror = function() {
+        statusText.textContent = "Couldn't hear you. Check microphone permission and try again.";
+      };
+
+      recognition.onend = function() {
+        listenButton.disabled = false;
+      };
+
+      try {
+        recognition.start();
+      } catch (error) {
+        listenButton.disabled = false;
+        statusText.textContent = "Please wait a moment and try again.";
+      }
+    });
+
+    document.getElementById("speakAgain").addEventListener("click", function() {
+      speak(lastReply);
+    });
+
+    document.getElementById("stopVoice").addEventListener("click", function() {
+      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+      statusText.textContent = "Voice stopped.";
+    });
+  </script>
+</body>
+</html>
