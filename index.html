@@ -250,18 +250,23 @@
   mix-blend-mode: screen;
   animation: energy-flow 5s ease-in-out infinite;
 }
-    @keyframes energy-flow {
+    
+@keyframes energy-flow {
   0% {
-    transform: rotate(0deg) scale(0.9);
-    border-radius: 45% 55% 62% 38%;
+    transform: rotate(0deg) scale(0.88);
+    border-radius: 42% 58% 65% 35% / 48% 38% 62% 52%;
   }
-  50% {
-    transform: rotate(180deg) scale(1.08);
-    border-radius: 60% 40% 35% 65%;
+  33% {
+    transform: rotate(120deg) scale(1.08);
+    border-radius: 65% 35% 42% 58% / 35% 60% 40% 65%;
+  }
+  66% {
+    transform: rotate(240deg) scale(0.96);
+    border-radius: 38% 62% 55% 45% / 60% 40% 58% 42%;
   }
   100% {
-    transform: rotate(360deg) scale(0.9);
-    border-radius: 45% 55% 62% 38%;
+    transform: rotate(360deg) scale(0.88);
+    border-radius: 42% 58% 65% 35% / 48% 38% 62% 52%;
   }
 }
     .ribbon-two {
