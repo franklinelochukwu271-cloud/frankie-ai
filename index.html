@@ -457,6 +457,41 @@
   mix-blend-mode: screen;
   animation: energy-flow 7s linear infinite;
 }
+    
+/* FRANKIE AI — Siri-inspired screen-edge glow */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  border: 3px solid transparent;
+  border-radius: 18px;
+  background:
+    linear-gradient(transparent, transparent) padding-box,
+    conic-gradient(
+      from 0deg,
+      #00eaff,
+      #4263ff,
+      #c044ff,
+      #ff4fcb,
+      #00eaff
+    ) border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  filter: drop-shadow(0 0 7px #00dfff);
+  animation: siriEdgeGlow 5s linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes siriEdgeGlow {
+  to {
+    filter: hue-rotate(360deg) drop-shadow(0 0 12px #8b5cff);
+  }
+}
   </style>
 </head>
 <body>
