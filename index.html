@@ -308,11 +308,22 @@
   mix-blend-mode: screen;
 }
     .ribbon-four {
-  inset: 5%;
-  border-width: 2px;
-  filter: drop-shadow(0 0 16px #20eaff);
-  animation: energy-flow 6s ease-in-out infinite reverse;
-  opacity: 0.65;
+  inset: -4%;
+  border: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 270deg,
+    transparent 0%,
+    #20eaff 15%,
+    #643bff 30%,
+    #ff54d8 45%,
+    transparent 60%,
+    #318bff 78%,
+    transparent 100%
+  );
+  filter: blur(28px);
+  animation: energy-flow 9s linear infinite reverse;
+  opacity: 0.55;
   mix-blend-mode: screen;
 }
     .energy-center {
