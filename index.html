@@ -220,6 +220,7 @@
 }
     .energy-field {
   position: absolute;
+  isolation: isolate;     
   width: 260px;
   height: 260px;
   top: 50%;
@@ -324,6 +325,25 @@
     transform: translate(-50%, -50%) scale(1.15);
     opacity: 1;
   }
+}
+    .energy-aura {
+  position: absolute;
+  inset: -12%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    #20eaff 15%,
+    #5835ff 30%,
+    #ff54d8 45%,
+    transparent 60%,
+    #318bff 78%,
+    transparent 100%
+  );
+  filter: blur(22px);
+  opacity: 0.75;
+  mix-blend-mode: screen;
+  animation: energy-flow 7s linear infinite;
 }
   </style>
 </head>
