@@ -62,6 +62,39 @@
     0 0 60px #5b42ff,
     0 0 100px #9b35ff66;
 }
+    .orb .orb-core {
+  position: absolute;
+  inset: 25%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    #ffffff 0%,
+    #8ff5ff 12%,
+    #318bff 38%,
+    #5528e8 68%,
+    #080d24 100%
+  );
+  box-shadow:
+    0 0 20px #20eaff,
+    0 0 45px #6b46ff;
+  animation: frankie-breathe 2s ease-in-out infinite alternate;
+}
+    .orb .orb-core::before {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  border-radius: 50%;
+  background: conic-gradient(
+    transparent,
+    #20eaff,
+    #8b5bff,
+    #ff54d8,
+    transparent
+  );
+  filter: blur(12px);
+  opacity: 0.8;
+  animation: frankie-swirl 3s linear infinite;
+}
     .orb::after {
   content: "";
   position: absolute;
