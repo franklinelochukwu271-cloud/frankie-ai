@@ -218,6 +218,26 @@
     filter: drop-shadow(0 0 30px #20eaff);
   }
 }
+    .energy-field {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      ellipse at center,
+      #ffffff 0%,
+      #a9faff 3%,
+      #438bff 12%,
+      #5420b8 28%,
+      transparent 68%
+    );
+  filter: contrast(1.2);
+  animation: energy-pulse 3s ease-in-out infinite;
+}
   </style>
 </head>
 <body>
