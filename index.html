@@ -407,16 +407,38 @@
     <p class="subtitle">Your personal voice assistant</p>
 
     
+
 <div class="energy-visual" aria-hidden="true">
-  <div class="energy-field">
-    <div class="energy-aura"></div>
-    <div class="energy-ribbon ribbon-one"></div>
-    <div class="energy-ribbon ribbon-two"></div>
-    <div class="energy-ribbon ribbon-three"></div>
-    <div class="energy-ribbon ribbon-four"></div>
-    <div class="energy-center"></div>
-    <div class="energy-particles"></div>
-  </div>
+  <svg class="plasma-orb" viewBox="0 0 320 320" role="presentation">
+    <defs>
+      <radialGradient id="plasmaCore">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="18%" stop-color="#eaffff"/>
+        <stop offset="38%" stop-color="#43eaff" stop-opacity=".9"/>
+        <stop offset="65%" stop-color="#6547ff" stop-opacity=".45"/>
+        <stop offset="100%" stop-color="#ff4fd8" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="plasmaFlow" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#27eaff"/>
+        <stop offset="35%" stop-color="#5265ff"/>
+        <stop offset="68%" stop-color="#c64cff"/>
+        <stop offset="100%" stop-color="#ff65d9"/>
+      </linearGradient>
+      <filter id="plasmaGlow" x="-80%" y="-80%" width="260%" height="260%">
+        <feGaussianBlur stdDeviation="7"/>
+      </filter>
+    </defs>
+    <circle class="plasma-halo" cx="160" cy="160" r="92" fill="url(#plasmaCore)"/>
+    <g class="plasma-ribbons">
+      <path d="M55 164 C75 65 218 48 260 127 C298 199 196 269 115 221 C48 182 96 94 178 102 C246 110 249 194 180 217 C124 236 82 191 113 149 C140 112 203 132 203 165"
+        fill="none" stroke="url(#plasmaFlow)" stroke-width="18" stroke-linecap="round" filter="url(#plasmaGlow)" opacity=".8"/>
+      <path d="M55 164 C75 65 218 48 260 127 C298 199 196 269 115 221 C48 182 96 94 178 102 C246 110 249 194 180 217 C124 236 82 191 113 149 C140 112 203 132 203 165"
+        fill="none" stroke="url(#plasmaFlow)" stroke-width="5" stroke-linecap="round" opacity=".95"/>
+      <path d="M82 111 C132 52 240 92 233 157 C226 224 125 254 91 184 C65 130 132 91 176 127 C210 155 180 195 148 181"
+        fill="none" stroke="#c7ffff" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+    </g>
+    <circle class="plasma-bright-core" cx="160" cy="160" r="56" fill="url(#plasmaCore)"/>
+  </svg>
 </div>
     
 
