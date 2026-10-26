@@ -270,11 +270,23 @@
   }
 }
     .ribbon-two {
-  inset: 10%;
-  border-width: 3px;
-  filter: drop-shadow(0 0 14px #a33cff);
-  animation: energy-flow 5s ease-in-out infinite reverse;
-  opacity: 0.85;
+  inset: 22%;
+  border: 0;
+  border-radius: 58% 42% 35% 65% / 42% 60% 40% 58%;
+  background: conic-gradient(
+    from 180deg,
+    transparent 0%,
+    #6335ff 18%,
+    #c43cff 35%,
+    #ff54d8 48%,
+    transparent 65%,
+    #20eaff 82%,
+    transparent 100%
+  );
+  filter: blur(15px);
+  animation: energy-flow 7s ease-in-out infinite reverse;
+  opacity: 0.8;
+  mix-blend-mode: screen;
 }
     .ribbon-three {
   inset: 25%;
