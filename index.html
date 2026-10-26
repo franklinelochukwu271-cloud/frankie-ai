@@ -211,6 +211,19 @@
   transform-origin: 160px 160px;
   animation: plasma-drift 8s linear infinite;
 }
+    .plasma-flow {
+  transform-origin: 160px 160px;
+  animation: plasma-flow-motion 6s linear infinite;
+}
+
+@keyframes plasma-flow-motion {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
 
 .plasma-halo {
   transform-origin: 160px 160px;
