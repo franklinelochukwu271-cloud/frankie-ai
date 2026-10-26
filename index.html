@@ -467,40 +467,78 @@
     
 
 <div class="energy-visual" aria-hidden="true">
-  <svg class="plasma-orb" viewBox="0 0 320 320" role="presentation">
-    <defs>
-      <radialGradient id="plasmaCore">
-        <stop offset="0%" stop-color="#ffffff"/>
-        <stop offset="18%" stop-color="#eaffff"/>
-        <stop offset="38%" stop-color="#43eaff" stop-opacity=".9"/>
-        <stop offset="65%" stop-color="#6547ff" stop-opacity=".45"/>
-        <stop offset="100%" stop-color="#ff4fd8" stop-opacity="0"/>
-      </radialGradient>
-      <linearGradient id="plasmaFlow" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#27eaff"/>
-        <stop offset="35%" stop-color="#5265ff"/>
-        <stop offset="68%" stop-color="#c64cff"/>
-        <stop offset="100%" stop-color="#ff65d9"/>
-      </linearGradient>
+  
+<svg class="plasma-orb" viewBox="0 0 320 320" role="presentation">
+  <defs>
+    <radialGradient id="coreLight">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="12%" stop-color="#f4ffff"/>
+      <stop offset="28%" stop-color="#67f0ff" stop-opacity=".95"/>
+      <stop offset="52%" stop-color="#5865ff" stop-opacity=".65"/>
+      <stop offset="76%" stop-color="#d044ff" stop-opacity=".25"/>
+      <stop offset="100%" stop-color="#080d24" stop-opacity="0"/>
+    </radialGradient>
 
-<filter id="plasmaGlow" x="-80%" y="-80%" width="260%" height="260%">
-  <feGaussianBlur stdDeviation="7"/>
-</filter>
-    </defs>
-    <circle class="plasma-halo" cx="160" cy="160" r="92" fill="url(#plasmaCore)"/>
-    <g class="plasma-ribbons">
-      <path d="M55 164 C75 65 218 48 260 127 C298 199 196 269 115 221 C48 182 96 94 178 102 C246 110 249 194 180 217 C124 236 82 191 113 149 C140 112 203 132 203 165"
-        fill="none" stroke="url(#plasmaFlow)" stroke-width="18" stroke-linecap="round" filter="url(#plasmaGlow)" opacity=".8"/>
-      <path d="M55 164 C75 65 218 48 260 127 C298 199 196 269 115 221 C48 182 96 94 178 102 C246 110 249 194 180 217 C124 236 82 191 113 149 C140 112 203 132 203 165"
-        fill="none" stroke="url(#plasmaFlow)" stroke-width="5" stroke-linecap="round" opacity=".95"/>
-      <path d="M82 111 C132 52 240 92 233 157 C226 224 125 254 91 184 C65 130 132 91 176 127 C210 155 180 195 148 181"
-        fill="none" stroke="#c7ffff" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+    <linearGradient id="flowLight" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a7ffff"/>
+      <stop offset="22%" stop-color="#20eaff"/>
+      <stop offset="48%" stop-color="#5265ff"/>
+      <stop offset="72%" stop-color="#d044ff"/>
+      <stop offset="100%" stop-color="#ff83e8"/>
+    </linearGradient>
+
+    <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+
+    <filter id="fineGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.5"/>
+    </filter>
+
+    <clipPath id="orbBoundary">
+      <circle cx="160" cy="160" r="116"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#orbBoundary)">
+    <circle cx="160" cy="160" r="116" fill="#15265d"/>
+
+    <circle cx="160" cy="160" r="110" fill="url(#coreLight)"/>
+
+    <g fill="none" stroke-linecap="round">
+      <g stroke="url(#flowLight)" filter="url(#softGlow)" opacity=".95">
+        <path d="M48 148 C80 58 164 48 221 88 S278 171 222 211 S108 252 75 188 S126 87 188 112 S225 178 174 204"
+          stroke-width="25"/>
+        <path d="M63 199 C36 137 91 69 148 86 S239 119 225 167 S151 238 112 207 S90 145 142 131 S204 157 190 187"
+          stroke-width="20"/>
+        <path d="M90 65 C151 92 243 81 255 139 S205 235 150 224 S69 164 106 127 S188 114 215 153"
+          stroke-width="17"/>
+      </g>
+
+      <g stroke="url(#flowLight)" opacity=".9">
+        <path d="M48 148 C80 58 164 48 221 88 S278 171 222 211 S108 252 75 188 S126 87 188 112 S225 178 174 204"
+          stroke-width="7"/>
+        <path d="M63 199 C36 137 91 69 148 86 S239 119 225 167 S151 238 112 207 S90 145 142 131 S204 157 190 187"
+          stroke-width="5"/>
+        <path d="M90 65 C151 92 243 81 255 139 S205 235 150 224 S69 164 106 127 S188 114 215 153"
+          stroke-width="4"/>
+      </g>
+
+      <g stroke="#d8ffff" filter="url(#fineGlow)" opacity=".8">
+        <path d="M59 157 C91 90 137 73 186 97 S248 151 204 196 S122 224 92 179 S128 115 168 132"
+          stroke-width="3"/>
+        <path d="M83 209 C108 159 128 105 184 117 S229 174 188 199 S122 197 127 164 S177 145 194 167"
+          stroke-width="2.5"/>
+      </g>
     </g>
-    <circle class="plasma-bright-core" cx="160" cy="160" r="56" fill="url(#plasmaCore)"/>
-  </svg>
+
+    <circle cx="160" cy="160" r="74" fill="url(#coreLight)"/>
+    <circle cx="160" cy="160" r="28" fill="url(#coreLight)"/>
+    <circle cx="160" cy="160" r="7" fill="#ffffff" opacity=".95"/>
+  </g>
+</svg>
 </div>
     
-
     <p id="status">Your assistant is ready.</p>
 
     <button id="listen">🎙️ Talk to Frankie</button>
