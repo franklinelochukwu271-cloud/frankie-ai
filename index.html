@@ -635,7 +635,8 @@ body::after {
       window.speechSynthesis.speak(utterance);
     }
 
-    function respond(text) {
+    
+    async function respond(text) {
       const words = text.toLowerCase().trim();
       let answer;
 
@@ -652,13 +653,33 @@ body::after {
       } else if (words.includes("thank")) {
         answer = "You're welcome! I'm happy to help.";
       } else if (words.includes("help")) {
-        answer = "You can greet me, ask my name, ask for the time or date, or type another message.";
+        answer = "You can ask me questions, and I'll try to help.";
       } else {
-        answer = "I heard you say: " + text +
-          ". My smart AI connection has not been added yet. We'll build that next.";
+        answer = "Let me think...";
+        reply.textContent = answer;
+        statusText.textContent = "Frankie is thinking...";
+
+        try {
+          const response = await fetch("https://frankie-ai.onrender.com/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: text })
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error || "AI request failed");
+          }
+
+          answer = data.reply || "I couldn't generate a reply.";
+        } catch (error) {
+          answer = "Sorry, I couldn't connect to my AI service. Please try again.";
+        }
       }
 
       reply.textContent = answer;
+      lastReply = answer;
       statusText.textContent = "Frankie has replied.";
       speak(answer);
     }
