@@ -482,9 +482,23 @@
         <stop offset="68%" stop-color="#c64cff"/>
         <stop offset="100%" stop-color="#ff65d9"/>
       </linearGradient>
-      <filter id="plasmaGlow" x="-80%" y="-80%" width="260%" height="260%">
-        <feGaussianBlur stdDeviation="7"/>
-      </filter>
+      
+<filter id="plasmaGlow" x="-80%" y="-80%" width="260%" height="260%">
+  <feTurbulence
+    type="fractalNoise"
+    baseFrequency="0.018"
+    numOctaves="2"
+    seed="8"
+    result="plasmaNoise"/>
+  <feDisplacementMap
+    in="SourceGraphic"
+    in2="plasmaNoise"
+    scale="18"
+    xChannelSelector="R"
+    yChannelSelector="G"
+    result="organicPlasma"/>
+  <feGaussianBlur in="organicPlasma" stdDeviation="5"/>
+</filter>
     </defs>
     <circle class="plasma-halo" cx="160" cy="160" r="92" fill="url(#plasmaCore)"/>
     <g class="plasma-ribbons">
