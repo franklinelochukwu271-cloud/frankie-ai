@@ -199,6 +199,59 @@
   overflow: visible;
   background: transparent;
 }
+    
+.plasma-orb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.plasma-ribbons {
+  transform-origin: 160px 160px;
+  animation: plasma-drift 8s ease-in-out infinite;
+}
+
+.plasma-halo {
+  transform-origin: 160px 160px;
+  animation: plasma-glow 3s ease-in-out infinite alternate;
+}
+
+.plasma-bright-core {
+  transform-origin: 160px 160px;
+  animation: plasma-core-pulse 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes plasma-drift {
+  0%, 100% {
+    transform: rotate(-8deg) scale(0.96);
+  }
+  50% {
+    transform: rotate(12deg) scale(1.04);
+  }
+}
+
+@keyframes plasma-glow {
+  from {
+    opacity: 0.65;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes plasma-core-pulse {
+  from {
+    opacity: 0.75;
+    transform: scale(0.88);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
 
 .energy-visual img {
   display: block;
