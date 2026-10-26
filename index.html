@@ -238,6 +238,24 @@
   filter: contrast(1.2);
   animation: energy-pulse 3s ease-in-out infinite;
 }
+    .energy-ribbon {
+  position: absolute;
+  inset: 18%;
+  border: 5px solid transparent;
+  border-radius: 45% 55% 62% 38%;
+  background:
+    linear-gradient(#080d24, #080d24) padding-box,
+    conic-gradient(
+      from 0deg,
+      transparent,
+      #20eaff,
+      #7b42ff,
+      #ff54d8,
+      transparent
+    ) border-box;
+  filter: drop-shadow(0 0 10px #20eaff);
+  animation: energy-flow 4s linear infinite;
+}
   </style>
 </head>
 <body>
