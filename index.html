@@ -256,6 +256,20 @@
   filter: drop-shadow(0 0 10px #20eaff);
   animation: energy-flow 4s linear infinite;
 }
+    @keyframes energy-flow {
+  0% {
+    transform: rotate(0deg) scale(0.9);
+    border-radius: 45% 55% 62% 38%;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.08);
+    border-radius: 60% 40% 35% 65%;
+  }
+  100% {
+    transform: rotate(360deg) scale(0.9);
+    border-radius: 45% 55% 62% 38%;
+  }
+}
   </style>
 </head>
 <body>
