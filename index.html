@@ -674,8 +674,9 @@ body::after {
 
           answer = data.reply || "I couldn't generate a reply.";
         } catch (error) {
-          answer = "Sorry, I couldn't connect to my AI service. Please try again.";
-        }
+  console.error("FRANKIE AI error:", error);
+  answer = "Connection error: " + error.message;
+}
       }
 
       reply.textContent = answer;
