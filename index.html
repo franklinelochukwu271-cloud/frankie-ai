@@ -634,7 +634,7 @@ body::after {
       const utterance = new SpeechSynthesisUtterance(text);
       const voices = window.speechSynthesis.getVoices();
       utterance.voice = voices.find(v => v.lang === "en-US" && /female|samantha|aria|jenny/i.test(v.name)) || voices.find(v => v.lang === "en-US");
-      utterance.lang = "en-NG";
+      utterance.lang = "en-US";
       utterance.rate = 1;
       window.speechSynthesis.speak(utterance);
     }
