@@ -684,7 +684,7 @@ body::after {
       reply.innerHTML = DOMPurify.sanitize(marked.parse(answer));
       lastReply = answer;
       statusText.textContent = "Frankie has replied.";
-      speak(answer.replace(/\*\*/g, "").replace(/[*_`#]/g, ""));
+      speak(reply.innerText);
     }
 
     document.getElementById("chatForm").addEventListener("submit", function(event) {
