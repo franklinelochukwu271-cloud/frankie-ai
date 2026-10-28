@@ -423,6 +423,153 @@ small {
     transition-duration: .01ms !important;
   }
 }
+    
+/* ===== NEW FRANKIE ENERGY ORB ===== */
+
+.energy-visual {
+  width: min(100%, 390px);
+  aspect-ratio: 1;
+  margin: 5px auto 15px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.frankie-orb {
+  width: 76%;
+  aspect-ratio: 1;
+  position: relative;
+  border-radius: 50%;
+  isolation: isolate;
+  background: radial-gradient(
+    circle at 50% 50%,
+    #ffffff 0%,
+    #c5ffff 4%,
+    #42caff 12%,
+    #2856e8 28%,
+    #29105e 53%,
+    #05091e 72%
+  );
+  box-shadow:
+    0 0 18px #70f5ff,
+    0 0 45px rgba(49, 135, 255, .8),
+    0 0 90px rgba(155, 51, 255, .45),
+    inset 0 0 28px rgba(255, 255, 255, .65);
+  animation: frankiePulse 4s ease-in-out infinite;
+}
+
+.orb-halo {
+  position: absolute;
+  inset: -22%;
+  z-index: -1;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    #2af5ff,
+    #4b63ff,
+    #f44dff,
+    transparent,
+    #2af5ff
+  );
+  filter: blur(22px);
+  opacity: .8;
+  animation: frankieSpin 7s linear infinite;
+}
+
+.orb-ribbon {
+  position: absolute;
+  inset: 12%;
+  border: 5px solid transparent;
+  border-radius: 46% 54% 62% 38% / 40% 45% 55% 60%;
+  background: linear-gradient(#090e2c, #090e2c) padding-box,
+    conic-gradient(
+      from 0deg,
+      transparent 0%,
+      #b5ffff 12%,
+      #25bfff 25%,
+      #9e4dff 43%,
+      #ff80f0 58%,
+      transparent 75%,
+      #48edff 90%,
+      transparent
+    ) border-box;
+  box-shadow: 0 0 18px rgba(66, 226, 255, .55);
+  mix-blend-mode: screen;
+}
+
+.ribbon-a {
+  animation: ribbonA 5s linear infinite;
+}
+
+.ribbon-b {
+  inset: 20%;
+  border-width: 4px;
+  border-radius: 58% 42% 35% 65% / 52% 62% 38% 48%;
+  animation: ribbonB 6s linear infinite;
+}
+
+.ribbon-c {
+  inset: 5%;
+  border-width: 3px;
+  border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%;
+  animation: ribbonA 9s linear infinite reverse;
+}
+
+.orb-light {
+  position: absolute;
+  inset: 33%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #fff 0%,
+    #c9ffff 20%,
+    rgba(70, 218, 255, .8) 42%,
+    rgba(91, 76, 255, .18) 72%,
+    transparent 100%
+  );
+  box-shadow: 0 0 24px #bfffff, 0 0 55px #48baff;
+  animation: lightBreath 2.8s ease-in-out infinite;
+}
+
+@keyframes frankieSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes frankiePulse {
+  0%, 100% {
+    transform: scale(.97);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: scale(1.04);
+    filter: hue-rotate(15deg);
+  }
+}
+
+@keyframes ribbonA {
+  from { transform: rotate(0deg) scaleX(1); }
+  50% { transform: rotate(180deg) scaleX(.82); }
+  to { transform: rotate(360deg) scaleX(1); }
+}
+
+@keyframes ribbonB {
+  from { transform: rotate(360deg) scaleY(1); }
+  50% { transform: rotate(180deg) scaleY(.75); }
+  to { transform: rotate(0deg) scaleY(1); }
+}
+
+@keyframes lightBreath {
+  0%, 100% { transform: scale(.85); opacity: .8; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+@media (max-width: 560px) {
+  .energy-visual {
+    width: min(100%, 330px);
+  }
+}
   </style>
  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> 
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
@@ -432,9 +579,16 @@ small {
     <h1>FRANKIE AI</h1>
     <p class="subtitle">Your personal voice assistant</p>
 
-    
 
 <div class="energy-visual" aria-hidden="true">
+  <div class="frankie-orb">
+    <div class="orb-halo"></div>
+    <div class="orb-ribbon ribbon-a"></div>
+    <div class="orb-ribbon ribbon-b"></div>
+    <div class="orb-ribbon ribbon-c"></div>
+    <div class="orb-light"></div>
+  </div>
+</div>
   
 <svg class="plasma-orb" viewBox="0 0 320 320" role="presentation">
   <defs>
