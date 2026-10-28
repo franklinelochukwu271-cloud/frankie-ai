@@ -11,71 +11,101 @@ app.get("/", (req, res) => {
 });
 
 app.post("/chat", async (req, res) => {
-  try {
-    const apiKey = process.env.GEMINI_API_KEY;
-    const message = req.body.message;
+  const apiKey = process.env.GEMINI_API_KEY;
+  const message = req.body.message;
 
-    if (!apiKey) {
-      return res.status(500).json({
-        error: "Gemini API key is not configured."
-      });
-    }
-
-    if (!message || typeof message !== "string") {
-      return res.status(400).json({
-        error: "Please send a message."
-      });
-    }
-
-    const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-goog-api-key": apiKey
-        },
-        body: JSON.stringify({
-          systemInstruction: {
-            parts: [{
-              text: "You are FRANKIE AI, a friendly, helpful voice assistant. Answer clearly and naturally."
-            }]
-          },
-          contents: [{
-            parts: [{
-              text: message.slice(0, 4000)
-            }]
-          }]
-        })
-      }
-    );
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      console.error("Gemini API error:", data);
-      return res.status(500).json({
-        error: "Gemini could not answer. Please check the API key and model access."
-      });
-    }
-
-    const answer =
-      data.candidates?.[0]?.content?.parts
-        ?.map(part => part.text || "")
-        .join("") || "I couldn't generate a reply.";
-
-    res.json({ reply: answer });
-
-  } catch (error) {
-    console.error("FRANKIE AI error:", error.message);
-    res.status(500).json({
-      error: "Sorry, I couldn't answer just now. Please try again."
+  if (!apiKey) {
+    return res.status(500).json({
+      reply: "Gemini API key is missing. Please check the backend settings."
     });
+  }
+
+  if (!message) {
+    return res.status(400).json({
+      reply: "Please enter a message."
+    });
+  }
+
+  const url =
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent";
+
+  const maxAttempts = 3;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      const response = await fetch(
+        `${url}?key=${encodeURIComponent(apiKey)}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [{ text: message }]
+              }
+            ]
+          })
+        }
+      );
+
+      if (!response.ok) {
+        const temporaryErrors = [429, 500, 502, 503, 504];
+
+        if (
+          temporaryErrors.includes(response.status) &&
+          attempt < maxAttempts
+        ) {
+          await new Promise(resolve =>
+            setTimeout(resolve, attempt * 1500)
+          );
+          continue;
+        }
+
+        console.error(
+          "Gemini API error:",
+          response.status,
+          await response.text()
+        );
+
+        return res.status(502).json({
+          reply: "Sorry, Frankie AI couldn't answer just now. Please try again."
+        });
+      }
+
+      const data = await response.json();
+      const answer = data.candidates?.[0]?.content?.parts
+        ?.map(part => part.text || "")
+        .join("");
+
+      if (!answer) {
+        return res.status(502).json({
+          reply: "Gemini returned no answer. Please try again."
+        });
+      }
+
+      return res.json({ reply: answer });
+
+    } catch (error) {
+      console.error("Frankie AI error:", error.message);
+
+      if (attempt < maxAttempts) {
+        await new Promise(resolve =>
+          setTimeout(resolve, attempt * 1500)
+        );
+        continue;
+      }
+
+      return res.status(502).json({
+        reply: "Sorry, Frankie AI couldn't answer just now. Please try again."
+      });
+    }
   }
 });
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`FRANKIE AI backend listening on port ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Frankie AI backend running on port ${PORT}`);
 });
