@@ -44,14 +44,28 @@
   -webkit-backdrop-filter: blur(18px);
 }
 
-    h1 {
-      color: #79aaff;
-      letter-spacing: 4px;
-      margin-bottom: 8px;
-    }
+   
+h1 {
+  color: #ffffff;
+  letter-spacing: 5px;
+  font-size: clamp(25px, 6vw, 34px);
+  font-weight: 800;
+  margin-top: 0;
+  margin-bottom: 8px;
+  text-shadow:
+    0 0 10px rgba(32, 234, 255, 0.65),
+    0 0 25px rgba(107, 70, 255, 0.55);
+}
 
-    .subtitle { color: #aab8d4; }
     
+.subtitle {
+  color: #b8c9e9;
+  font-size: 14px;
+  letter-spacing: 1.2px;
+  line-height: 1.6;
+  margin-top: 0;
+  opacity: 0.9;
+}
 /* FRANKIE AI — New Energy Core */
 .orb {
   position: relative;
@@ -141,44 +155,94 @@
   z-index: -1;
 }
 
-    #status { color: #9dc4ff; min-height: 24px; }
 
-    button {
-      border: 0;
-      border-radius: 14px;
-      padding: 14px 20px;
-      margin: 6px;
-      color: white;
-      font-size: 15px;
-      cursor: pointer;
-      background: linear-gradient(135deg, #246bfe, #7939e8);
-    }
+#status {
+  color: #8feaff;
+  min-height: 24px;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+  line-height: 1.6;
+  text-shadow: 0 0 12px rgba(32, 234, 255, 0.22);
+  transition: color 0.25s ease;
+}
+
+    
+button {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 15px;
+  padding: 14px 20px;
+  margin: 6px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #167dff, #783cff);
+  box-shadow: 0 6px 20px rgba(65, 90, 255, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 25px rgba(65, 120, 255, 0.38);
+}
 
     button:disabled { opacity: 0.55; cursor: wait; }
 
-    #listen { border-radius: 30px; padding: 16px 28px; }
+    
+#listen {
+  border-radius: 30px;
+  padding: 16px 28px;
+  min-height: 54px;
+  background: linear-gradient(135deg, #00bde8, #6250ff, #a238ef);
+  box-shadow:
+    0 0 18px rgba(32, 234, 255, 0.22),
+    0 6px 24px rgba(98, 80, 255, 0.3);
+  letter-spacing: 0.3px;
+}
 
-    input {
-      width: 100%;
-      padding: 15px;
-      border-radius: 12px;
-      border: 1px solid #344b85;
-      background: #101b3d;
-      color: white;
-      font-size: 16px;
-      margin-top: 16px;
-    }
+    
+input {
+  width: 100%;
+  padding: 16px;
+  border-radius: 15px;
+  border: 1px solid rgba(105, 145, 255, 0.35);
+  background: rgba(8, 15, 39, 0.95);
+  color: #ffffff;
+  font-size: 16px;
+  margin-top: 16px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
 
-    #reply {
-      text-align: left;
-      line-height: 1.6;
-      background: #101b3d;
-      border-radius: 14px;
-      padding: 16px;
-      min-height: 65px;
-      margin-top: 20px;
-      overflow-wrap: anywhere;
-    }
+input::placeholder {
+  color: #91a4c8;
+}
+
+input:focus {
+  border-color: #39dfff;
+  box-shadow: 0 0 0 3px rgba(32, 234, 255, 0.10),
+              0 0 18px rgba(32, 234, 255, 0.16);
+}
+    
+#reply {
+  text-align: left;
+  line-height: 1.7;
+  color: #edf4ff;
+  background: linear-gradient(
+    145deg,
+    rgba(19, 32, 72, 0.95),
+    rgba(10, 17, 43, 0.95)
+  );
+  border: 1px solid rgba(105, 145, 255, 0.22);
+  border-radius: 18px;
+  padding: 18px;
+  min-height: 75px;
+  margin-top: 22px;
+  overflow-wrap: anywhere;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 8px 25px rgba(0, 0, 0, 0.18);
+}
 
     small { color: #aab8d4; display: block; margin-top: 18px; }
     
@@ -538,6 +602,31 @@ body::after {
 @keyframes siriEdgePulse {
   from { opacity: 0.45; }
   to { opacity: 1; }
+}
+    
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+    align-items: flex-start;
+  }
+
+  .app {
+    padding: 24px 16px;
+    border-radius: 22px;
+  }
+
+  .energy-visual {
+    max-width: 290px;
+    height: 290px;
+  }
+
+  button {
+    max-width: 100%;
+  }
+
+  #chatForm button {
+    margin-top: 10px;
+  }
 }
   </style>
  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> 
