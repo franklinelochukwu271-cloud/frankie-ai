@@ -125,7 +125,7 @@ h1 {
   content: "";
   position: absolute;
   inset: 12%;
-  border: none
+  border: 1px solid rgba(100, 220, 255, 0.25);
   border-radius: 50%;
   box-shadow:
     0 0 18px #20eaff,
@@ -373,7 +373,7 @@ input:focus {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: background: transparent;
+  background: transparent;
   filter: contrast(1.5) saturate(1.4);
   animation: energy-pulse 3s ease-in-out infinite;
 }
@@ -626,6 +626,112 @@ body::after {
 
   #chatForm button {
     margin-top: 10px;
+  }
+}
+    /* FRANKIE AI — PREMIUM SCREEN */
+.app {
+  width: min(100%, 760px);
+  max-width: 760px;
+  padding: 32px 24px;
+  border: 1px solid rgba(80, 190, 255, 0.22);
+  border-radius: 28px;
+  background: linear-gradient(
+    145deg,
+    rgba(12, 22, 52, 0.96),
+    rgba(5, 9, 25, 0.98)
+  );
+  box-shadow:
+    0 0 45px rgba(0, 140, 255, 0.12),
+    inset 0 0 35px rgba(65, 100, 255, 0.05);
+  backdrop-filter: blur(18px);
+}
+
+.subtitle {
+  color: #a9c7ff;
+  letter-spacing: 2px;
+}
+
+#status {
+  color: #6fffe9;
+  text-shadow: 0 0 12px rgba(70, 255, 230, 0.4);
+}
+
+#chatForm {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+#message {
+  flex: 1;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid rgba(100, 190, 255, 0.28);
+  border-radius: 15px;
+  background: #080f27;
+  color: white;
+  outline: none;
+}
+
+#message:focus {
+  border-color: #42cfff;
+  box-shadow: 0 0 16px rgba(66, 207, 255, 0.18);
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid rgba(125, 210, 255, 0.3);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #126bff, #742bff);
+  color: white;
+  font-weight: 700;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(70, 130, 255, 0.35);
+}
+
+#listen {
+  padding: 14px 22px;
+  background: linear-gradient(135deg, #073d63, #174dce);
+}
+
+#reply {
+  margin-top: 20px;
+  padding: 20px;
+  min-height: 90px;
+  border: 1px solid rgba(100, 190, 255, 0.18);
+  border-radius: 18px;
+  background: rgba(3, 9, 26, 0.8);
+  color: #e4edff;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+#speakAgain,
+#stopVoice {
+  margin: 12px 5px 0;
+  padding: 12px 16px;
+}
+
+@media (max-width: 520px) {
+  .app {
+    padding: 24px 15px;
+    border-radius: 22px;
+  }
+
+  #chatForm {
+    gap: 7px;
+  }
+
+  #message {
+    padding: 13px 10px;
+  }
+
+  .energy-visual {
+    max-width: 100%;
   }
 }
   </style>
