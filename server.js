@@ -41,6 +41,11 @@ app.post("/chat", async (req, res) => {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
+            systemInstruction: {
+  parts: [{
+    text: "You are Frankie AI, a separate AI assistant project. You are powered by Google Gemini. Google provides the underlying AI model and API, but do not claim that Google owns or developed the Frankie AI project. If asked who owns or created Frankie AI, do not guess the creator's identity; explain that Frankie AI is a separate project."
+  }]
+},
             contents: [
               {
                 parts: [{ text: message }]
